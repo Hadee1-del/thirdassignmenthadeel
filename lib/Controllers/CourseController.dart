@@ -94,7 +94,23 @@ class CourseController extends GetxController {
 
     getCourseList();
   }
+  Future<void> _addCourseToApi(CourseModel course) async {
+    try {
+      DioClient _client = DioClient();
+      final response = await _client.dio.post(
+        teachersAPI, // استبدل بـ URL الخاص بك
+        data: course.toJson(),
+      );
 
+      if (response.statusCode == 200) {
+        Get.snackbar("Info", "Course synced with API.");
+      } else {
+        Get.snackbar("Error", "Failed to sync with API.");
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Error during sync: $e");
+    }
+  }
   void updateCourse(
       int courseId, {
         required String title,
@@ -160,8 +176,6 @@ class CourseController extends GetxController {
         await _deleteCourseFromApi(courseId);
       } else {
 
-
-
       // Check internet connectivity
 
       Get.snackbar('Info', 'Course deleted locally. Sync with API when online.',
@@ -191,23 +205,7 @@ Future<void> _deleteCourseFromApi(int courseId) async {
     Get.snackbar("Error", "Error during sync: $e");
   }
 }
-Future<void> _addCourseToApi(CourseModel course) async {
-  try {
-    DioClient _client = DioClient();
-    final response = await _client.dio.post(
-      teachersAPI, // استبدل بـ URL الخاص بك
-      data: course.toJson(),
-    );
 
-    if (response.statusCode == 200) {
-      Get.snackbar("Info", "Course synced with API.");
-    } else {
-      Get.snackbar("Error", "Failed to sync with API.");
-    }
-  } catch (e) {
-    Get.snackbar("Error", "Error during sync: $e");
-  }
-}
  /* Future<void> _addCourseToApi(CourseModel course) async {
     try {
       final response = await http.post(
@@ -236,7 +234,7 @@ Future<bool> isConnected() async {
 }*/
 Future<bool> isConnected() async {
   try {
-    final result = await InternetAddress.lookup(''); // تحقق من الاتصال
+    final result = await InternetAddress.lookup(baseURL); // تحقق من الاتصال
     return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
   } catch (_) {
     return false;  // في حالة عدم وجود اتصال بالإنترنت
