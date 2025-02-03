@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../Controllers/CourseController.dart';
 import '../Models/CourseModel.dart';
 import 'package:hadeelalkori3/Theme/Colors.dart';
+import 'package:hadeelalkori3/Theme/Colors.dart';
 
 
 class CourseDetailsPage extends StatelessWidget {
@@ -19,7 +20,7 @@ class CourseDetailsPage extends StatelessWidget {
     CourseModel? course = _controller.courseDetail;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Course Details",
           style: TextStyle(
             fontWeight: FontWeight.bold,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hadeelalkori3/Controllers/LoginController.dart';
+import '../Controllers/LoginController.dart';
 import 'package:hadeelalkori3/Theme/Colors.dart';
 
 

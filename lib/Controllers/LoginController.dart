@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:hadeelalkori3/Config/constants.dart';
 import 'package:hadeelalkori3/Controllers/HomeController.dart';
+import 'package:hadeelalkori3/View/LoginPage.dart';
 import 'package:get/get.dart';
 
 import 'package:hadeelalkori3/APIServices/DioClinetHadeel.dart';
-import '../Helpers/TokenStorage.dart';
+import 'package:hadeelalkori3/Helpers/TokenStorage.dart';
 import 'package:hadeelalkori3/Models/LoginResponsHadeel.dart';
-import '../View/HomePage.dart';
+import 'package:hadeelalkori3/Models/LoginResponsHadeel.dart';
+import 'package:hadeelalkori3/View/HomePage.dart';
 
 
 class LoginController extends GetxController {
@@ -103,6 +105,7 @@ class LoginController extends GetxController {
     await TokenStorage.clearTokens();
     Get.snackbar("Success", "Logged out successfully",
         snackPosition: SnackPosition.BOTTOM);
+    Get.offAll(()=>LoginPage());
   }
 
 }
